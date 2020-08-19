@@ -9,7 +9,7 @@ interface Item {
 }
 
 const originData: Item[] = [];
-for (let i = 0; i < 100; i++) {
+for (let i = 0; i < 5; i++) {
   originData.push({
     key: i.toString(),
     name: `Edrward ${i}`,
@@ -70,9 +70,6 @@ const EditableTable = () => {
 
   const edit = (record: Item) => {
     form.setFieldsValue({
-      name: '',
-      age: '',
-      address: '',
       ...record
     });
     setEditingKey(record.key);
@@ -132,15 +129,16 @@ const EditableTable = () => {
         const editable = isEditing(record);
         return editable ? (
           <span>
-            <a
-              href="javascript:;"
+            <Button
+              type="link"
               onClick={() => save(record.key)}
               style={{ marginRight: 8 }}
             >
               Save
-            </a>
+            </Button>
+
             <Popconfirm title="Sure to cancel?" onConfirm={cancel}>
-              <a>Cancel</a>
+              <Button type="link">Cancel</Button>
             </Popconfirm>
           </span>
         ) : (
@@ -188,6 +186,13 @@ const EditableTable = () => {
           onChange: cancel
         }}
       />
+      <Button
+        onClick={() => {
+          console.log(data);
+        }}
+      >
+        submit
+      </Button>
     </Form>
   );
 };
